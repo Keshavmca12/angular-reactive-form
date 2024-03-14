@@ -1,0 +1,52 @@
+<form [formGroup]="formData" (ngSubmit)="submitForm()">
+    <!-- Form controls go here -->
+    <select formControlName="countryData" (ngModelChange)='onCoutryChange()' style="margin: 20px;
+        padding: 15px;">
+        <option [ngValue]="null" disabled>Select Country</option>
+        <option *ngFor="let country of countryList" [ngValue]="country">{{country.name}}</option>
+
+    </select>
+
+    <select formControlName="stateData" (ngModelChange)='onStateChange()' style="margin: 20px;
+          padding: 15px;">
+        <option [ngValue]="null" disabled>Select State</option>
+        <option *ngFor="let state of stateList" [ngValue]="state">{{state.name}}</option>
+    </select>
+
+    <select formControlName="cityData" style="margin: 20px;
+          padding: 15px;">
+        <option [ngValue]="null" disabled>Select City</option>
+        <option *ngFor="let city of cityList" [ngValue]="city">{{city.name}}</option>
+    </select>
+
+    <button type="submit" style="margin: 20px;
+          padding: 15px;">Submit</button>
+
+    <button type="button" (click)="addDetails()" style="margin: 20px;
+padding: 15px;"> Add</button>
+
+  
+</form>
+
+<h4 style="color: brown;">  Form Data List </h4>
+<div *ngIf="formDataStore != undefined && formDataStore.length > 0">
+    <table>
+        <thead>
+            <th class="tableHead">Serial No</th>
+            <th class="tableHead">Country</th>
+            <th class="tableHead">State</th>
+            <th class="tableHead">City</th>
+            <th class="tableHead">Actions</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let location of formDataStore; index as i">
+                <td>{{i+1}}</td>
+                <td>{{location.country.name}}</td>
+                <td>{{location.state.name}}</td>
+                <td>{{location.city.name}}</td>
+                <td>  <button type="button" (click)="deleteDetails(i)" style="margin: 10px;
+                    padding: 5px;"> Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
